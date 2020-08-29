@@ -2,12 +2,12 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import TitlePage from '../components/TitlePage';
 
-export default class ExtractScreen extends React.Component {
+export default class NewMaintenanceScreen extends React.Component {
     render () {
         return (
-            <View style={{marginTop: 20}}>
-                <View>
-                    <TitlePage label={'Extrato'}/>
+            <View style={styles.container}>
+                <View style={{marginTop: 20}}>
+                    <TitlePage label={'Adicionar Manutenção'}/>
                 </View>
             </View>
         );
@@ -16,8 +16,7 @@ export default class ExtractScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
-        justifyContent: 'center',
+        flex: 1,
         backgroundColor: '#E5E5E5'
     }
 })

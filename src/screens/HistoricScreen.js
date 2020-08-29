@@ -1,14 +1,82 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import TitlePage from '../components/TitlePage';
+import axios from 'axios';
+import MaintenanceList from '../components/MaintenanceList';
 
 export default class HistoricScreen extends React.Component {
-    render () {
-        return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
-                <View style={{alignItems: 'center'}}>
-                    <Text style={{fontSize: 50}}>Tela Histórico</Text>
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            maintenance: [],
+            loading: false,
+            error: false,
+        };
+    }
+
+    componentDidMount() {
+        this.setState({ loading: true });
+        axios
+        .get('https://randomuser.me/api/?nat=br&results=20')
+        .then(response => {
+            const {results} = response.data;
+            this.setState({
+                maintenance: results,
+                loading: false,
+            })
+        }).catch(error => {
+            this.setState({
+                error: true,
+                loading: false
+            })
+        });
+    }
+    
+    renderList() {
+        const textElements = this.state.maintenance.map(maintenanceItem => {
+            const {first} = maintenanceItem.name;
+            return <Text key={first}>{first}</Text>
+        })
+
+        return textElements;
+    }
+
+    render() {
+        return (      
+            <View style={styles.container}>
+                <View style={{marginTop: 20}}>
+                    <TitlePage label={'Histórico'}/>
                 </View>
+                {
+                    this.state.loading
+                    ?
+                    <ActivityIndicator size="large" color='#FFB400' />
+                    :
+                        this.state.error
+                        ?
+                        <Text style={styles.error}>Erro ao carregar lista de manutenções...</Text>
+                        :
+                        <MaintenanceList 
+                            maintenance={this.state.maintenance}
+                            //Implementar Toque
+                        />
+                }
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: '#E5E5E5',
+    },
+    error: {
+        fontSize: 18,
+        color: 'red',
+        alignSelf: 'center'
+    }
+});
+  
