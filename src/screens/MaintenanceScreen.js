@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import ActionButton from 'react-native-action-button';
 import TitlePage from '../components/TitlePage';
 import axios from 'axios';

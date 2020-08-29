@@ -2,14 +2,14 @@ import React from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import TitlePage from '../components/TitlePage';
 import axios from 'axios';
-import MaintenanceList from '../components/MaintenanceList';
+import HistoricList from '../components/HistoricList';
 
 export default class HistoricScreen extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            maintenance: [],
+            historic: [],
             loading: false,
             error: false,
         };
@@ -22,7 +22,7 @@ export default class HistoricScreen extends React.Component {
         .then(response => {
             const {results} = response.data;
             this.setState({
-                maintenance: results,
+                historic: results,
                 loading: false,
             })
         }).catch(error => {
@@ -34,8 +34,8 @@ export default class HistoricScreen extends React.Component {
     }
     
     renderList() {
-        const textElements = this.state.maintenance.map(maintenanceItem => {
-            const {first} = maintenanceItem.name;
+        const textElements = this.state.historic.map(historicItem => {
+            const {first} = historicItem.name;
             return <Text key={first}>{first}</Text>
         })
 
@@ -55,10 +55,10 @@ export default class HistoricScreen extends React.Component {
                     :
                         this.state.error
                         ?
-                        <Text style={styles.error}>Erro ao carregar lista de manutenções...</Text>
+                        <Text style={styles.error}>Erro ao carregar lista de históricos...</Text>
                         :
-                        <MaintenanceList 
-                            maintenance={this.state.maintenance}
+                        <HistoricList 
+                            historic={this.state.historic}
                             //Implementar Toque
                         />
                 }
