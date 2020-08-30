@@ -16,6 +16,7 @@
     "react": "16.8.3",
     "react-native": "^0.59.9",
     "react-native-action-button": "^2.8.5",
+    "react-native-collapsible": "^1.5.3",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-paper": "^4.0.1",
     "react-native-reanimated": "^1.13.0",

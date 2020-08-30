@@ -1,27 +1,55 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import Collapsible from 'react-native-collapsible';
 
-const HistoricListItem = props => {
+export default class HistoricListItem extends React.Component {
+    
+    constructor(props) {
+        super(props);
 
-    const {historicItem} = props;
-    const {title, first, last} = historicItem.name;
-    const {thumbnail} = historicItem.picture;
+        this.state = {
+            isExpanded: true,
+            detail: "",
+        }
+    }
 
-    return(
-        <View style={styles.line}>
-            <Image source={{uri: thumbnail}} style={styles.equipament}/>
-            <View style={styles.colum}>
-                <Text style={styles.lineText1}>
-                    {'Formatação e Limpeza'}
-                </Text>
-                <Text style={styles.lineText2}>
-                    {title + ' ' + first + ' ' + last}
-                </Text>
-                <Text style={styles.lineText3}>
-                    {'R$: 100,00'}
-                </Text>
+    detail = () => {
+        return(
+            <Collapsible collapsed={this.state.isExpanded}>
+                <View style={styles.detail}>
+                    <Text style={styles.lineText1}>
+                        {'Aqui vai os detalhes'}
+                    </Text>
+                </View>
+            </Collapsible>
+        );
+    }
+
+    render() {
+        const {historicItem} = this.props;
+        const {title, first, last} = historicItem.name;
+        const {thumbnail} = historicItem.picture;
+        const {isExpanded} = this.state;
+
+        return(
+            <View style={styles.container}>
+                <View style={styles.line}>
+                    <Image source={{uri: thumbnail}} style={styles.equipament}/>
+                    <View style={styles.colum}>
+                        <Text style={styles.lineText1}>
+                            {'Formatação e Limpeza'}
+                        </Text>
+                        <Text style={styles.lineText2}>
+                            {title + ' ' + first + ' ' + last}
+                        </Text>
+                        <Text style={styles.lineText3}>
+                            {'R$: 100,00'}
+                        </Text>
+                    </View>
+                </View>
+                {this.detail()}
                 <TouchableOpacity onPress={ () => {
-                    console.log('');
+                    this.setState({isExpanded:  !this.state.isExpanded})
                 }}>
                     <View style={{alignSelf: 'flex-end', marginRight: 20}}>
                         <Text style={styles.lineText4}>
@@ -30,17 +58,24 @@ const HistoricListItem = props => {
                     </View>
                 </TouchableOpacity>
             </View>
-        </View>
-    )
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-    line: {
-        height: 100, 
+    container: {
         borderBottomWidth: 1,
         borderBottomColor: '#bbb',
+    },
+    detail: {
+        flex: 1,
+        marginLeft: 20,
+    },
+    line: {
+        height: 100, 
+        
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     colum: {
         flexDirection: 'column',
@@ -77,7 +112,13 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 15,
         borderRadius: 5
+    },
+    collapsed: {
+        maxHeight: 60,
+    },
+    expanded: {
+        flex: 1,
     }
 })
 
-export default HistoricListItem;
+// export default HistoricListItem;
