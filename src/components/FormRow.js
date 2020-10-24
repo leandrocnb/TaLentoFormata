@@ -9,10 +9,10 @@ const FormRow = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    // padding: 10,
+    padding: 10,
     backgroundColor: "#E5E5E5",
-    // marginTop: 20,
-    marginBottom: 35,
+    marginTop: 5,
+    marginBottom: 5,
   },
 });
 

@@ -20,8 +20,8 @@ class LoginScreen extends React.Component {
     super(props);
 
     this.state = {
-      email: "",
-      password: "",
+      email: "user@mail.com",
+      password: "userteste",
       isLoading: false,
       message: "",
     };
@@ -83,7 +83,8 @@ class LoginScreen extends React.Component {
   }
 
   renderButton() {
-    if (this.state.isLoading) return <ActivityIndicator />;
+    if (this.state.isLoading)
+      return <ActivityIndicator size="large" color="#FFB400" />;
 
     return (
       <View style={styles.button}>

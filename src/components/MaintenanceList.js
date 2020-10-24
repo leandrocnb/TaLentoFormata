@@ -12,7 +12,7 @@ const MaintenanceList = (props) => {
       renderItem={({ item }) => (
         <MaintenanceListItem maintenanceItem={item} onPressItem={onPressItem} />
       )}
-      keyExtractor={(item, index) => item.title + index}
+      keyExtractor={(item, index) => item.client + index}
     />
   );
 };

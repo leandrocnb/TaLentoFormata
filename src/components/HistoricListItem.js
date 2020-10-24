@@ -4,14 +4,17 @@ import Collapsible from "react-native-collapsible";
 
 const HistoricListItem = (props) => {
   const { historicItem } = props;
-  const { title, gender, rate, description, img } = historicItem;
+  const { client, typeRepair, price, note, img, equipment } = historicItem;
   const [isExpanded, setIsExpanded] = useState(true);
 
   detail = () => {
     return (
       <Collapsible collapsed={isExpanded}>
         <View style={styles.detail}>
-          <Text style={styles.lineText1}>{description}</Text>
+          <Text style={styles.lineText2}>Equipamento: </Text>
+          <Text style={styles.textCollapsed}>{equipment}</Text>
+          <Text style={styles.lineText2}>Observação: </Text>
+          <Text style={styles.textCollapsed}>{note}</Text>
         </View>
       </Collapsible>
     );
@@ -21,15 +24,15 @@ const HistoricListItem = (props) => {
     <View style={styles.container}>
       <View style={styles.line}>
         <Image
-          source={{ uri: img }}
+          source={{ uri: `data:image/jpeg;base64,${img}` }}
           style={styles.equipament}
           aspectRatio={1}
           resizeMode="contain"
         />
         <View style={styles.colum}>
-          <Text style={styles.lineText1}>{title}</Text>
-          <Text style={styles.lineText2}>{gender}</Text>
-          <Text style={styles.lineText3}>{"R$:" + rate}</Text>
+          <Text style={styles.lineText1}>{typeRepair}</Text>
+          <Text style={styles.lineText2}>{client}</Text>
+          <Text style={styles.lineText3}>{"R$ " + price}</Text>
         </View>
       </View>
       {this.detail()}
@@ -56,12 +59,11 @@ const styles = StyleSheet.create({
     borderBottomColor: "#bbb",
   },
   detail: {
-    flex: 1,
-    marginLeft: 20,
+    marginStart: 20,
+    marginEnd: 10,
   },
   line: {
     height: 100,
-
     alignItems: "center",
     flexDirection: "row",
   },
@@ -69,11 +71,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 4,
     padding: 10,
-  },
-  status: {
-    fontSize: 15,
-    fontFamily: "Rivalia",
-    flexDirection: "row",
   },
   lineText1: {
     fontSize: 20,
@@ -104,7 +101,9 @@ const styles = StyleSheet.create({
   collapsed: {
     maxHeight: 60,
   },
-  expanded: {
-    flex: 1,
+  textCollapsed: {
+    fontSize: 15,
+    fontFamily: "Revalia",
+    paddingStart: 10,
   },
 });

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const MaintenanceListItem = (props) => {
   const { maintenanceItem, onPressItem } = props;
-  const { title, gender, rate } = maintenanceItem;
+  const { client, typeRepair, price, status } = maintenanceItem;
   const { img } = maintenanceItem;
 
   return (
@@ -14,17 +14,17 @@ const MaintenanceListItem = (props) => {
     >
       <View style={styles.line}>
         <Image
-          source={{ uri: img }}
+          source={{ uri: `data:image/jpeg;base64,${img}` }}
           style={styles.equipament}
           aspectRatio={1}
           resizeMode="contain"
         />
         <View style={styles.colum}>
-          <Text style={styles.lineText1}>{title}</Text>
-          <Text style={styles.lineText2}>{gender}</Text>
-          <Text style={styles.lineText3}>{"R$: " + rate}</Text>
+          <Text style={styles.lineText1}>{typeRepair}</Text>
+          <Text style={styles.lineText2}>{client}</Text>
+          <Text style={styles.lineText3}>{"R$: " + price}</Text>
           <View style={{ alignSelf: "flex-end", marginRight: 20 }}>
-            <Text style={styles.lineText4}>{"Em Andamento"}</Text>
+            <Text style={styles.lineText4}>{status}</Text>
           </View>
         </View>
       </View>

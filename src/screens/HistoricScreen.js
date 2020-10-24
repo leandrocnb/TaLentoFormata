@@ -1,64 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import axios from "axios";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import HistoricList from "../components/HistoricList";
+import { connect } from "react-redux";
+import { watchMaintenance } from "../actions";
 
-import series from "../../series.json";
-
-export default class HistoricScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      historic: series,
-      loading: false,
-      error: false,
-    };
+class HistoricScreen extends React.Component {
+  componentDidMount() {
+    this.props.watchMaintenance();
   }
-
-  // componentDidMount() {
-  //   this.setState({ loading: true });
-  //   axios
-  //     .get("https://randomuser.me/api/?nat=br&results=20")
-  //     .then((response) => {
-  //       const { results } = response.data;
-  //       this.setState({
-  //         historic: results,
-  //         loading: false,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       this.setState({
-  //         error: true,
-  //         loading: false,
-  //       });
-  //     });
-  // }
-
-  renderList() {
-    const textElements = this.state.historic.map((historicItem) => {
-      const { id } = historicItem.id;
-      return <Text key={id}>{title}</Text>;
-    });
-
-    return textElements;
-  }
-
   render() {
+    if (this.props.maintenance === null) {
+      return <ActivityIndicator size="large" color="#FFB400" />;
+    }
     return (
       <View style={styles.container}>
-        {this.state.loading ? (
-          <ActivityIndicator size="large" color="#FFB400" />
-        ) : this.state.error ? (
-          <Text style={styles.error}>
-            Erro ao carregar lista de históricos...
-          </Text>
-        ) : (
-          <HistoricList
-            historic={this.state.historic}
-            //Implementar Toque
-          />
-        )}
+        <HistoricList historic={this.props.maintenance} />
       </View>
     );
   }
@@ -76,3 +32,20 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
 });
+
+const mapStateToProps = (state) => {
+  const { maintenanceList } = state;
+
+  if (maintenanceList === null) {
+    return { maintenance: maintenanceList };
+  }
+
+  const keys = Object.keys(maintenanceList);
+  const maintenanceListWithId = keys.map((key) => {
+    return { ...maintenanceList[key], id: key };
+  });
+
+  return { maintenance: maintenanceListWithId };
+};
+
+export default connect(mapStateToProps, { watchMaintenance })(HistoricScreen);

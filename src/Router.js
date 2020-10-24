@@ -5,10 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   MaintenanceScreen,
   NewMaintenanceScreen,
-  EditMaintenanceScreen,
   HistoricScreen,
   ExtractScreen,
   LoginScreen,
+  DetailsMaintenanceScreen,
 } from "./screens";
 import { Text, View } from "react-native";
 
@@ -18,22 +18,6 @@ const MaintenanceStack = createStackNavigator();
 function MaintenanceTabStack() {
   return (
     <MaintenanceStack.Navigator>
-      <MaintenanceStack.Screen
-        name="NewMaintenanceScreen"
-        component={NewMaintenanceScreen}
-        options={{
-          title: "ADICIONAR",
-          headerStyle: {
-            backgroundColor: "#747474",
-          },
-          headerTitleStyle: {
-            fontSize: 25,
-            fontFamily: "Revalia",
-          },
-          headerTintColor: "#FFB400",
-          headerTitleAlign: "center",
-        }}
-      />
       <MaintenanceStack.Screen
         name="MANUTENÇÕES"
         component={MaintenanceScreen}
@@ -51,10 +35,26 @@ function MaintenanceTabStack() {
         }}
       />
       <MaintenanceStack.Screen
-        name="EditMaintenance"
-        component={EditMaintenanceScreen}
+        name="NewMaintenanceScreen"
+        component={NewMaintenanceScreen}
         options={{
-          title: "EDITAR",
+          title: "ADICIONAR",
+          headerStyle: {
+            backgroundColor: "#747474",
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+            fontFamily: "Revalia",
+          },
+          headerTintColor: "#FFB400",
+          headerTitleAlign: "center",
+        }}
+      />
+      <MaintenanceStack.Screen
+        name="DetailsMaintenance"
+        component={DetailsMaintenanceScreen}
+        options={{
+          title: "DETALHES",
           headerStyle: {
             backgroundColor: "#747474",
           },
@@ -158,13 +158,6 @@ export default class App extends React.Component {
       <NavigationContainer>
         <LoginStack.Navigator>
           <LoginStack.Screen
-            name="MainNavigation"
-            component={MainNavigation}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <LoginStack.Screen
             name="Login"
             component={LoginScreen}
             options={{
@@ -178,6 +171,13 @@ export default class App extends React.Component {
               },
               headerTintColor: "#FFB400",
               headerTitleAlign: "center",
+            }}
+          />
+          <LoginStack.Screen
+            name="MainNavigation"
+            component={MainNavigation}
+            options={{
+              headerShown: false,
             }}
           />
         </LoginStack.Navigator>

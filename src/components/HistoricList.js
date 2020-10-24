@@ -10,7 +10,7 @@ const HistoricList = (props) => {
       style={styles.container}
       data={historic}
       renderItem={({ item }) => <HistoricListItem historicItem={item} />}
-      keyExtractor={(item, index) => item.title + index}
+      keyExtractor={(item, index) => item.client + index}
     />
   );
 };
