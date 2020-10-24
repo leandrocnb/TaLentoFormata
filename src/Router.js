@@ -2,6 +2,7 @@ import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   MaintenanceScreen,
   NewMaintenanceScreen,
@@ -10,7 +11,7 @@ import {
   LoginScreen,
   DetailsMaintenanceScreen,
 } from "./screens";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
 // Rotas de Navegação Manutenções
 const MaintenanceStack = createStackNavigator();
@@ -145,9 +146,48 @@ function MainNavigation() {
         },
       }}
     >
-      <Tab.Screen name="Home" component={MaintenanceTabStack} />
-      <Tab.Screen name="Histórico" component={HistoricTabStack} />
-      <Tab.Screen name="Extrato" component={ExtractTabStack} />
+      <Tab.Screen
+        name="Home"
+        component={MaintenanceTabStack}
+        options={{
+          tabBarLabel: () => {
+            {
+              null;
+            }
+          },
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={color} size={40} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Histórico"
+        component={HistoricTabStack}
+        options={{
+          tabBarLabel: () => {
+            {
+              null;
+            }
+          },
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="history" color={color} size={40} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Extrato"
+        component={ExtractTabStack}
+        options={{
+          tabBarLabel: () => {
+            {
+              null;
+            }
+          },
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="receipt" color={color} size={40} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }

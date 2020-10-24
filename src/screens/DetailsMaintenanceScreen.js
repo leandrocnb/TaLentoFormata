@@ -33,7 +33,11 @@ function DetailsMaintenanceScreen({ route, navigation, deleteMaintenance }) {
           />
           <View style={styles.alignRightContainer}>
             <Text style={styles.textStyle}>Status</Text>
-            <Text style={styles.textStyleInfo}>{status}</Text>
+            {status === "Em andamento" ? (
+              <Text style={styles.textEmAndamento}>{status}</Text>
+            ) : (
+              <Text style={styles.textAguardando}>{status}</Text>
+            )}
           </View>
         </View>
 
@@ -115,6 +119,18 @@ const styles = StyleSheet.create({
     fontFamily: "Revalia",
     padding: 4,
     fontSize: 15,
+  },
+  textEmAndamento: {
+    fontFamily: "Revalia",
+    padding: 4,
+    fontSize: 15,
+    color: "#00C213",
+  },
+  textAguardando: {
+    fontFamily: "Revalia",
+    padding: 4,
+    fontSize: 15,
+    color: "#FF0000",
   },
   equipament: {
     flex: 5,

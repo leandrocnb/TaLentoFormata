@@ -24,7 +24,11 @@ const MaintenanceListItem = (props) => {
           <Text style={styles.lineText2}>{client}</Text>
           <Text style={styles.lineText3}>{"R$: " + price}</Text>
           <View style={{ alignSelf: "flex-end", marginRight: 20 }}>
-            <Text style={styles.lineText4}>{status}</Text>
+            {status === "Em andamento" ? (
+              <Text style={styles.textEmAndamento}>{status}</Text>
+            ) : (
+              <Text style={styles.textAguardando}>{status}</Text>
+            )}
           </View>
         </View>
       </View>
@@ -65,11 +69,17 @@ const styles = StyleSheet.create({
     fontFamily: "Revalia",
     fontWeight: "bold",
   },
-  lineText4: {
+  textEmAndamento: {
     fontSize: 16,
     fontFamily: "Revalia",
     fontWeight: "bold",
     color: "#00C213",
+  },
+  textAguardando: {
+    fontSize: 16,
+    fontFamily: "Revalia",
+    fontWeight: "bold",
+    color: "#FF0000",
   },
   equipament: {
     aspectRatio: 1,

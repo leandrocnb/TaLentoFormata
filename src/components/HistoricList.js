@@ -9,7 +9,11 @@ const HistoricList = (props) => {
     <FlatList
       style={styles.container}
       data={historic}
-      renderItem={({ item }) => <HistoricListItem historicItem={item} />}
+      renderItem={({ item }) =>
+        item.status === "Concluído" ? (
+          <HistoricListItem historicItem={item} />
+        ) : null
+      }
       keyExtractor={(item, index) => item.client + index}
     />
   );

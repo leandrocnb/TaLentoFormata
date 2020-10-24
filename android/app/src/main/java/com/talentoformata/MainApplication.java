@@ -3,8 +3,9 @@ package com.talentoformata;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import fr.snapp.imagebase64.RNImgToBase64Package;
+import org.reactnative.camera.RNCameraPackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
@@ -30,8 +31,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNCameraPackage(),
             new VectorIconsPackage(),
+            new RNImgToBase64Package(),
+            new RNCameraPackage(),
             new RNScreensPackage(),
             new SafeAreaContextPackage(),
             new ReanimatedPackage(),

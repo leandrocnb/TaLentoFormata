@@ -9,9 +9,14 @@ const MaintenanceList = (props) => {
     <FlatList
       style={styles.container}
       data={maintenance}
-      renderItem={({ item }) => (
-        <MaintenanceListItem maintenanceItem={item} onPressItem={onPressItem} />
-      )}
+      renderItem={({ item }) =>
+        item.status !== "Concluído" ? (
+          <MaintenanceListItem
+            maintenanceItem={item}
+            onPressItem={onPressItem}
+          />
+        ) : null
+      }
       keyExtractor={(item, index) => item.client + index}
     />
   );
