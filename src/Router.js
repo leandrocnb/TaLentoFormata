@@ -6,12 +6,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import {
   MaintenanceScreen,
   NewMaintenanceScreen,
+  DetailsMaintenanceScreen,
+  CallScreen,
+  NewCallScreen,
+  DetailsCallScreen,
   HistoricScreen,
   ExtractScreen,
   LoginScreen,
-  DetailsMaintenanceScreen,
 } from "./screens";
-import { View } from "react-native";
 
 // Rotas de Navegação Manutenções
 const MaintenanceStack = createStackNavigator();
@@ -68,6 +70,64 @@ function MaintenanceTabStack() {
         }}
       />
     </MaintenanceStack.Navigator>
+  );
+}
+
+// Rotas de Navegação Chamada de Manutenções
+const CallStack = createStackNavigator();
+
+function CallTabStack() {
+  return (
+    <CallStack.Navigator>
+      <CallStack.Screen
+        name="call"
+        component={CallScreen}
+        options={{
+          title: "CHAMADAS TÉCNICAS",
+          headerStyle: {
+            backgroundColor: "#747474",
+          },
+          headerTitleStyle: {
+            fontSize: 22,
+            fontFamily: "Revalia",
+          },
+          headerTintColor: "#FFB400",
+          headerTitleAlign: "center",
+        }}
+      />
+      <CallStack.Screen
+        name="NewCallScreen"
+        component={NewCallScreen}
+        options={{
+          title: "ADICIONAR",
+          headerStyle: {
+            backgroundColor: "#747474",
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+            fontFamily: "Revalia",
+          },
+          headerTintColor: "#FFB400",
+          headerTitleAlign: "center",
+        }}
+      />
+      <CallStack.Screen
+        name="DetailsCall"
+        component={DetailsCallScreen}
+        options={{
+          title: "DETALHES",
+          headerStyle: {
+            backgroundColor: "#747474",
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+            fontFamily: "Revalia",
+          },
+          headerTintColor: "#FFB400",
+          headerTitleAlign: "center",
+        }}
+      />
+    </CallStack.Navigator>
   );
 }
 
@@ -171,6 +231,24 @@ function MainNavigation() {
           },
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="history" color={color} size={40} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Call"
+        component={CallTabStack}
+        options={{
+          tabBarLabel: () => {
+            {
+              null;
+            }
+          },
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="home-import-outline"
+              color={color}
+              size={40}
+            />
           ),
         }}
       />

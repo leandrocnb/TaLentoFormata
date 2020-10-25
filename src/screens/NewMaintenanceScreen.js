@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Picker,
   View,
@@ -13,7 +13,14 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
 } from "react-native";
-import { setField, saveMaintenance, setAllFields, resetForm } from "../actions";
+import {
+  setField,
+  setFieldExtracts,
+  saveExtract,
+  saveMaintenance,
+  setAllFields,
+  resetForm,
+} from "../actions";
 import { connect } from "react-redux";
 import FormRow from "../components/FormRow";
 import { RNCamera } from "react-native-camera";
@@ -136,8 +143,11 @@ class NewMaintenanceScreen extends React.Component {
   viewForm() {
     const {
       maintenanceForm,
+      extractForm,
       setField,
+      setFieldExtracts,
       saveMaintenance,
+      saveExtract,
       navigation,
     } = this.props;
 
@@ -146,7 +156,20 @@ class NewMaintenanceScreen extends React.Component {
         <View style={styles.containerPicker}>
           <Picker
             selectedValue={maintenanceForm.status}
-            onValueChange={(itemValue) => setField("status", itemValue)}
+            onValueChange={(itemValue) => {
+              setField("status", itemValue);
+              setFieldExtracts("client", maintenanceForm.client);
+              setFieldExtracts("typeRepair", maintenanceForm.typeRepair);
+              setFieldExtracts("price", maintenanceForm.price);
+              setFieldExtracts(
+                "date",
+                new Date().getDate() +
+                  "/" +
+                  (new Date().getMonth() + 1) +
+                  "/" +
+                  new Date().getFullYear()
+              );
+            }}
           >
             <Picker.Item label="Aguardando" value={"Aguardando"} />
             <Picker.Item label="Em andamento" value={"Em andamento"} />
@@ -162,7 +185,7 @@ class NewMaintenanceScreen extends React.Component {
               style={styles.img}
             />
           ) : (
-            <Text style={styles.textStyle}>Insira um imagem</Text>
+            <Text style={styles.textStyle}>Insira uma imagem</Text>
           )}
           <View style={{ paddingTop: 10 }}>
             <Button
@@ -225,6 +248,7 @@ class NewMaintenanceScreen extends React.Component {
             placeholder="Informe o Valor"
             value={maintenanceForm.price}
             onChangeText={(value) => setField("price", value)}
+            keyboardType="number-pad"
           />
         </FormRow>
         <FormRow>
@@ -249,6 +273,9 @@ class NewMaintenanceScreen extends React.Component {
                 this.setState({ isLoading: true });
                 try {
                   await saveMaintenance(maintenanceForm);
+                  if (maintenanceForm.status === "Concluído") {
+                    await saveExtract(extractForm);
+                  }
                   navigation.goBack();
                 } catch (error) {
                   Alert.alert("Error", error.message);
@@ -277,6 +304,8 @@ class NewMaintenanceScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 8,
+    paddingTop: 16,
+    paddingBottom: 16,
     flexDirection: "column",
     backgroundColor: "#E5E5E5",
   },
@@ -328,18 +357,21 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   buttonContainer: {
-    marginBottom: 20,
+    marginBottom: 40,
   },
 });
 
 const mapStateToProps = (state) => {
   return {
     maintenanceForm: state.maintenanceForm,
+    extractForm: state.extractForm,
   };
 };
 
 const mapDispatchToProps = {
   setField,
+  saveExtract,
+  setFieldExtracts,
   saveMaintenance,
   setAllFields,
   resetForm,

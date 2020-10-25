@@ -1,12 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import ExtractList from "../components/ExtractList";
 
-export default class ExtractScreen extends React.Component {
+import { connect } from "react-redux";
+import { watchExtract } from "../actions";
+
+class ExtractScreen extends React.Component {
+  componentDidMount() {
+    this.props.watchExtract();
+  }
+
   render() {
+    if (this.props.extract === null) {
+      <View style={styles.container}></View>;
+    }
     return (
-      <View style={{ marginTop: 20 }}>
-        <ExtractList />
+      <View style={styles.container}>
+        <ExtractList extract={this.props.extract} />
       </View>
     );
   }
@@ -15,7 +25,23 @@ export default class ExtractScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     backgroundColor: "#E5E5E5",
   },
 });
+
+const mapStateToProps = (state) => {
+  const { extractList } = state;
+
+  if (extractList === null) {
+    return { extract: extractList };
+  }
+
+  const keys = Object.keys(extractList);
+  const extractListWithId = keys.map((key) => {
+    return { ...extractList[key], id: key };
+  });
+
+  return { extract: extractListWithId };
+};
+
+export default connect(mapStateToProps, { watchExtract })(ExtractScreen);
