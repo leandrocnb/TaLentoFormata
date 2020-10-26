@@ -35,7 +35,11 @@ const CallListItem = (props) => {
           >
             <View style={styles.row}>
               <Text style={styles.lineTextLabel}> Status: </Text>
-              <Text style={styles.lineTextAgendada}>{status}</Text>
+              {status === "Agendada" ? (
+                <Text style={styles.lineTextAgendada}>{status}</Text>
+              ) : (
+                <Text style={styles.lineTextConcluida}>{status}</Text>
+              )}
             </View>
           </View>
         </View>
@@ -68,8 +72,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "Revalia",
   },
-  lineTextAgendada: {
+  lineTextConcluida: {
     color: "#00C213",
+    fontSize: 15,
+    fontFamily: "Revalia",
+  },
+  lineTextAgendada: {
+    color: "#FFB400",
     fontSize: 15,
     fontFamily: "Revalia",
   },

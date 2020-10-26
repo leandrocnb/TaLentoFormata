@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
+import { TextInputMask } from "react-native-masked-text";
 import {
   setFieldCalls,
   saveCall,
@@ -62,18 +63,26 @@ class NewCallScreen extends React.Component {
         </FormRow>
         <FormRow>
           <Text style={styles.textStyle}>Data</Text>
-          <TextInput
+          <TextInputMask
+            type={"datetime"}
             style={styles.textInput}
             placeholder="Informe a Data"
+            options={{
+              format: "DD/MM/YYYY",
+            }}
             value={callForm.date}
             onChangeText={(value) => setFieldCalls("date", value)}
           />
         </FormRow>
         <FormRow>
           <Text style={styles.textStyle}>Horário</Text>
-          <TextInput
+          <TextInputMask
+            type={"datetime"}
             style={styles.textInput}
             placeholder="Informe o Horário"
+            options={{
+              format: "HH:mm",
+            }}
             value={callForm.time}
             onChangeText={(value) => setFieldCalls("time", value)}
           />
@@ -122,6 +131,14 @@ const styles = StyleSheet.create({
     padding: 8,
     flexDirection: "column",
     backgroundColor: "#E5E5E5",
+  },
+  containerPicker: {
+    alignSelf: "flex-end",
+    width: "50%",
+    backgroundColor: "#FFB400",
+    borderRadius: 10,
+    marginEnd: 10,
+    paddingLeft: 25,
   },
   textStyle: {
     fontFamily: "Revalia",

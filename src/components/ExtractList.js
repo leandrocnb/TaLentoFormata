@@ -9,7 +9,7 @@ class ExtractList extends React.Component {
     let valueTotal = 0;
 
     extract.forEach((item) => {
-      valueTotal += Number(item.price.replace(",", "."));
+      valueTotal += Number(item.price.replace(",", ".").replace("R$", ""));
     });
 
     return (

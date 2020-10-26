@@ -15,7 +15,7 @@ const ExtractListItem = (props) => {
           <Text style={styles.item}>{typeRepair}</Text>
         </View>
         <View style={{ flex: 2 }}>
-          <Text style={styles.item}>{price}</Text>
+          <Text style={styles.item}>{price.replace("R$", "")}</Text>
         </View>
       </View>
       <Text style={styles.divLine}>

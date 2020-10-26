@@ -32,7 +32,7 @@ const HistoricListItem = (props) => {
         <View style={styles.colum}>
           <Text style={styles.lineText1}>{typeRepair}</Text>
           <Text style={styles.lineText2}>{client}</Text>
-          <Text style={styles.lineText3}>{"R$ " + price}</Text>
+          <Text style={styles.lineText3}>{price}</Text>
         </View>
       </View>
       {this.detail()}

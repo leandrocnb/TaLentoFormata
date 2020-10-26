@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
 } from "react-native";
+import { TextInputMask } from "react-native-masked-text";
 import {
   setField,
   setFieldExtracts,
@@ -243,12 +244,12 @@ class NewMaintenanceScreen extends React.Component {
         </FormRow>
         <FormRow>
           <Text style={styles.textStyle}>Valor</Text>
-          <TextInput
+          <TextInputMask
             style={styles.textInput}
             placeholder="Informe o Valor"
+            type={"money"}
             value={maintenanceForm.price}
             onChangeText={(value) => setField("price", value)}
-            keyboardType="number-pad"
           />
         </FormRow>
         <FormRow>

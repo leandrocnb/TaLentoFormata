@@ -158,8 +158,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    marginHorizontal: 100,
     marginTop: 30,
+    width: "100%",
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   logoImage: {
     alignItems: "center",

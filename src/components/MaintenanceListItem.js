@@ -22,7 +22,7 @@ const MaintenanceListItem = (props) => {
         <View style={styles.colum}>
           <Text style={styles.lineText1}>{typeRepair}</Text>
           <Text style={styles.lineText2}>{client}</Text>
-          <Text style={styles.lineText3}>{"R$: " + price}</Text>
+          <Text style={styles.lineText3}>{price}</Text>
           <View style={{ alignSelf: "flex-end", marginRight: 20 }}>
             {status === "Em andamento" ? (
               <Text style={styles.textEmAndamento}>{status}</Text>

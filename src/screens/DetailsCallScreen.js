@@ -19,8 +19,12 @@ function DetailsCallScreen({ route, navigation, deleteCall }) {
       <ScrollView style={styles.container}>
         <View style={styles.alignRightContainer}>
           <View style={styles.containerRow}>
-            <Text style={styles.textStyle}>Status</Text>
-            <Text style={styles.textAgendado}>{status}</Text>
+            <Text style={styles.textStyle}>Status: </Text>
+            {status === "Agendada" ? (
+              <Text style={styles.lineTextAgendada}>{status}</Text>
+            ) : (
+              <Text style={styles.lineTextConcluida}>{status}</Text>
+            )}
           </View>
         </View>
         <View style={styles.inputsContainer}>
@@ -95,11 +99,15 @@ const styles = StyleSheet.create({
     padding: 4,
     fontSize: 15,
   },
-  textAgendado: {
-    fontFamily: "Revalia",
-    padding: 4,
-    fontSize: 15,
+  lineTextConcluida: {
     color: "#00C213",
+    fontSize: 15,
+    fontFamily: "Revalia",
+  },
+  lineTextAgendada: {
+    color: "#FFB400",
+    fontSize: 15,
+    fontFamily: "Revalia",
   },
   buttonContaier: {
     flex: 2,
