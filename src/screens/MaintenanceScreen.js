@@ -12,7 +12,20 @@ class MaintenanceScreen extends React.Component {
 
   render() {
     if (this.props.maintenance === null) {
-      return <ActivityIndicator size="large" color="#FFB400" />;
+      return (
+        <View style={styles.container}>
+          <Text style={styles.textStyle}>
+            Nenhuma manutenção encontrada, por enquanto!
+          </Text>
+          <ActionButton
+            buttonColor="#747474"
+            size={70}
+            onPress={() => {
+              this.props.navigation.navigate("NewMaintenanceScreen");
+            }}
+          />
+        </View>
+      );
     }
     return (
       <View style={styles.container}>
@@ -42,10 +55,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#E5E5E5",
   },
-  error: {
-    fontSize: 18,
-    color: "red",
-    alignSelf: "center",
+  textStyle: {
+    fontFamily: "Revalia",
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 10,
+    textAlign: "center",
   },
 });
 

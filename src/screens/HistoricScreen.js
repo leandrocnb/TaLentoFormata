@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import HistoricList from "../components/HistoricList";
 import { connect } from "react-redux";
 import { watchMaintenance } from "../actions";
@@ -10,7 +10,13 @@ class HistoricScreen extends React.Component {
   }
   render() {
     if (this.props.maintenance === null) {
-      return <ActivityIndicator size="large" color="#FFB400" />;
+      return (
+        <View style={styles.container}>
+          <Text style={styles.textStyle}>
+            Nenhum histórico encontrado, por enquanto!
+          </Text>
+        </View>
+      );
     }
     return (
       <View style={styles.container}>
@@ -26,10 +32,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#E5E5E5",
   },
-  error: {
-    fontSize: 18,
-    color: "red",
-    alignSelf: "center",
+  textStyle: {
+    fontFamily: "Revalia",
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 4,
+    textAlign: "center",
   },
 });
 

@@ -51,7 +51,7 @@ function DetailsMaintenanceScreen({ route, navigation, deleteMaintenance }) {
         </View>
         <View style={styles.alignRightContainer}>
           <Text style={styles.textStyle}>Valor</Text>
-          <Text style={styles.textStyleInfo}>{"R$ " + price}</Text>
+          <Text style={styles.textStyleInfo}>{price}</Text>
         </View>
         <View style={styles.inputsContainer}>
           <Text style={styles.textStyle}>Observações</Text>

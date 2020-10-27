@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 import ActionButton from "react-native-action-button";
 import CallList from "../components/CallList";
 import { connect } from "react-redux";
@@ -12,7 +12,20 @@ class CallScreen extends React.Component {
 
   render() {
     if (this.props.call === null) {
-      return <ActivityIndicator size="large" color="#FFB400" />;
+      return (
+        <View style={styles.container}>
+          <Text style={styles.textStyle}>
+            Nenhuma chamada encontrada, por enquanto!
+          </Text>
+          <ActionButton
+            buttonColor="#747474"
+            size={70}
+            onPress={() => {
+              this.props.navigation.navigate("NewCallScreen");
+            }}
+          />
+        </View>
+      );
     }
     return (
       <View style={styles.container}>
@@ -43,10 +56,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#E5E5E5",
     padding: 20,
   },
-  error: {
-    fontSize: 18,
-    color: "red",
-    alignSelf: "center",
+  textStyle: {
+    fontFamily: "Revalia",
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 10,
+    textAlign: "center",
   },
 });
 
